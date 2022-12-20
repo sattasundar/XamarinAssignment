@@ -20,7 +20,7 @@ namespace ThreeKTech
         {
             InitializeComponent();
 
-            await NavigationService.NavigateAsync("master");
+            await NavigationService.NavigateAsync("login");
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
