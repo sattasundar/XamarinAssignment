@@ -1,0 +1,186 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="http://prismlibrary.com"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="ThreeKTech.Views.LoginPage"
+             xmlns:controls="clr-namespace:ThreeKTech.Controls"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit">
+    <Grid RowDefinitions="2*,8*,2*">
+        <!--Logo-->
+        <Frame HasShadow="False"
+               Margin="50,30,50,0"
+               BorderColor="Black"
+               Padding="5">
+            <Label Text="Logo"
+                   FontSize="22"
+                   TextTransform="Uppercase"
+                   HorizontalOptions="CenterAndExpand"
+                   VerticalTextAlignment="Center"/>
+        </Frame>
+        <!--Login-->
+        <StackLayout Grid.Row="1" Margin="20,50,20,0">
+            <!--Create Common Entry View for Reusable -->
+            <Label Text="Email"
+                   Style="{DynamicResource EntryLabelStyle}"/>
+            <Frame Style="{DynamicResource EntryFrameStyle}">
+                <Frame.Triggers>
+                    <DataTrigger TargetType="Frame"
+                                 Binding="{Binding Source={x:Reference entryEmail}, Path=IsFocused}"
+                                 Value="True">
+                        <Setter Property="HasShadow" Value="True"/>
+                    </DataTrigger>
+                </Frame.Triggers>
+                <StackLayout Orientation="Horizontal" 
+                             VerticalOptions="Center"
+                             Margin="10,0">
+                    <controls:BorderlessEntry x:Name="entryEmail"
+                                              Text="{Binding Email, Mode=TwoWay}"
+                                              HorizontalOptions="FillAndExpand" 
+                                              Placeholder="john.doe@mail.com"
+                                              Keyboard="Email">
+                        <controls:BorderlessEntry.Behaviors>
+                            <xct:EmailValidationBehavior DecorationFlags="Trim"
+                                                         InvalidStyle="{DynamicResource IvalidEntryStyle}"
+                                                         ValidStyle="{DynamicResource ValidEntryStyle}"/>
+                        </controls:BorderlessEntry.Behaviors>
+                    </controls:BorderlessEntry>
+                    <Label Text="Not you?"
+                           TextColor="{DynamicResource SecondaryColor}"
+                           VerticalTextAlignment="Center">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding NotYouCommand}"/>
+                        </Label.GestureRecognizers>
+                    </Label>
+                </StackLayout>
+            </Frame>
+            <Label Text="Password" 
+                   Style="{DynamicResource EntryLabelStyle}"/>
+            <Frame Style="{DynamicResource EntryFrameStyle}">
+                <Frame.Triggers>
+                    <DataTrigger TargetType="Frame"
+                                 Binding="{Binding Source={x:Reference entryPassword}, Path=IsFocused}"
+                                 Value="True">
+                        <Setter Property="HasShadow" Value="True"/>
+                    </DataTrigger>
+                </Frame.Triggers>
+                <StackLayout Orientation="Horizontal" 
+                             VerticalOptions="Center"
+                             Margin="10,0">
+                    <controls:BorderlessEntry x:Name="entryPassword"
+                                              Text="{Binding Password, Mode=TwoWay}"
+                                              HorizontalOptions="FillAndExpand"
+                                              IsPassword="{Binding IsPasswordVisibility}"
+                                              Placeholder="Password"/>
+                    <ImageButton Source="fingerprint.png"
+                                 BackgroundColor="Transparent"
+                                 WidthRequest="20"
+                                 xct:IconTintColorEffect.TintColor="DimGray"/>
+                    <ImageButton BackgroundColor="Transparent"
+                                 WidthRequest="20"
+                                 xct:IconTintColorEffect.TintColor="{StaticResource SecondaryColor}"
+                                 Command="{Binding PasswordVisibilityCommand}">
+                        <ImageButton.Triggers>
+                            <!--Not working may be due to parent frame also have trigger-->
+                            <DataTrigger TargetType="ImageButton"
+                                         Binding="{Binding IsPasswordVisibility}"
+                                         Value="True">
+                                <Setter Property="Source" Value="eye"/>
+                            </DataTrigger>
+                            <DataTrigger TargetType="ImageButton"
+                                         Binding="{Binding IsPasswordVisibility}"
+                                         Value="False">
+                                <Setter Property="Source" Value="eyeoff"/>
+                            </DataTrigger>
+                        </ImageButton.Triggers>
+                    </ImageButton>
+                </StackLayout>
+            </Frame>
+            <Label Text="Forgot password?" 
+                   Style="{DynamicResource LinkLabelStyle}">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding ForgotPasswordCommand}"/>
+                </Label.GestureRecognizers>
+            </Label>
+            <Button Text="Log In"
+                    Style="{DynamicResource PrimaryButtonStyle}"
+                    Command="{Binding LogInCommand}"/>
+            <Button Text="Sign Up"
+                    Style="{DynamicResource OutlineButtonStyle}"
+                    Command="{Binding SignUpCommand}"/>
+            <Frame BackgroundColor="Transparent"
+                   HeightRequest="30">
+                <!--Focus language picker-->
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnSelectLanguageClicked"/>
+                </Frame.GestureRecognizers>
+                <Grid ColumnSpacing="0"
+                      ColumnDefinitions="*,*">
+                    <Image Source="language.png" 
+                           HorizontalOptions="End"
+                           VerticalOptions="Center"
+                           Grid.Column="0"
+                           xct:IconTintColorEffect.TintColor="{DynamicResource SecondaryColor}"
+                           Margin="0,0,-3,0"/>
+                    <Image Source="arrowdown.png"
+                           HorizontalOptions="Start"
+                           VerticalOptions="Center"
+                           Grid.Column="1"
+                           HeightRequest="25"
+                           Margin="-3,-2,0,0"
+                           xct:IconTintColorEffect.TintColor="{DynamicResource SecondaryColor}"/>
+                </Grid>
+            </Frame>
+            <Picker x:Name="picker"
+                    Title="Select language"
+                    IsVisible="False">
+                <Picker.ItemsSource>
+                    <x:Array Type="{x:Type x:String}">
+                        <x:String>English</x:String>
+                        <x:String>French</x:String>
+                        <x:String>Hindi</x:String>
+                        <x:String>Japanese</x:String>
+                        <x:String>Spanish</x:String>
+                    </x:Array>
+                </Picker.ItemsSource>
+            </Picker>
+        </StackLayout>
+        <!--Footer-->
+        <Grid Grid.Row="2" 
+              BackgroundColor="{DynamicResource PrimaryColor}">
+            <StackLayout Orientation="Horizontal"
+                         VerticalOptions="CenterAndExpand"
+                         HorizontalOptions="CenterAndExpand">
+                <Label Text="Privacy Policy"
+                       TextColor="#949FAD"
+                       TextDecorations="Underline"/>
+                <BoxView Color="#949FAD" 
+                         HeightRequest="5"
+                         WidthRequest="1"/>
+                <Label Text="Terms of Use"
+                       TextColor="#949FAD"
+                       TextDecorations="Underline"/>
+                <BoxView Color="#949FAD" 
+                         HeightRequest="5"
+                         WidthRequest="1"/>
+                <Label Text="EULA"
+                       TextColor="#949FAD"
+                       TextDecorations="Underline"/>
+            </StackLayout>
+            <Frame BackgroundColor="{DynamicResource AccentColor}"
+                   HeightRequest="30"
+                   HasShadow="False"
+                   Margin="0,0,-10,-55"
+                   Opacity="0.5"
+                   Rotation="175"
+                   VerticalOptions="End"/>
+            <Frame BackgroundColor="{DynamicResource AccentColor}"
+                   HeightRequest="25"
+                   HasShadow="False"
+                   Margin="-10,0,0,-60"
+                   Opacity="0.5"
+                   Rotation="6"
+                   VerticalOptions="End"/>
+        </Grid>
+    </Grid>
+</ContentPage>

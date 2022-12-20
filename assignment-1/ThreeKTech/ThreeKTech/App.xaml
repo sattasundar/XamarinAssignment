@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<prism:PrismApplication xmlns="http://xamarin.com/schemas/2014/forms"
+                        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                        xmlns:prism="http://prismlibrary.com"
+                        xmlns:controls="clr-namespace:ThreeKTech.Controls"
+                        x:Class="ThreeKTech.App">
+    <Application.Resources>
+
+        <!-- Application resource dictionary -->
+        <ResourceDictionary>
+            <Color x:Key="PrimaryColor">#092444</Color>
+            <Color x:Key="PrimaryDarkColor">#00001e</Color>
+            <Color x:Key="SecondaryColor">#2F54AE</Color>
+            <Color x:Key="AccentColor">#384b6f</Color>
+            <Color x:Key="SelectedTabColor">#133867</Color>
+            <Color x:Key="PageBackgroundColor">#FEFEFE</Color>
+            <Color x:Key="WhiteColor">#ffffff</Color>
+            <Color x:Key="GrayColor">#C0C0C0</Color>
+            <Color x:Key="LightGrayColor">#E8E8E8</Color> 
+
+            <Style x:Key="EntryFrameStyle" TargetType="Frame">
+                <Setter Property="BorderColor" Value="LightGray"/>
+                <Setter Property="Padding" Value="0"/>
+                <Setter Property="HasShadow" Value="False"/>
+            </Style>
+            <Style x:Key="EntryLabelStyle" TargetType="Label">
+                <Setter Property="FontAttributes" Value="Bold"/>
+                <Setter Property="TextColor" Value="Black"/>
+                <Setter Property="FontSize" Value="16"/>
+                <Setter Property="Margin" Value="0,10,0,0"/>
+            </Style>
+            <Style x:Key="IvalidEntryStyle" TargetType="controls:BorderlessEntry">
+                <Setter Property="TextColor" Value="Red"/>
+            </Style>
+            <Style x:Key="ValidEntryStyle" TargetType="controls:BorderlessEntry">
+                <Setter Property="TextColor" Value="Red"/>
+            </Style>
+            <Style x:Key="LinkLabelStyle" TargetType="Label">
+                <Setter Property="TextColor" Value="{DynamicResource SecondaryColor}"/>
+                <Setter Property="FontSize" Value="14"/>
+                <Setter Property="Margin" Value="0,10,0,0"/>
+            </Style>
+            <Style x:Key="PrimaryButtonStyle" TargetType="Button">
+                <Setter Property="TextColor" Value="{DynamicResource WhiteColor}"/>
+                <Setter Property="BackgroundColor" Value="{DynamicResource SecondaryColor}"/>
+                <Setter Property="TextTransform" Value="None"/>
+                <Setter Property="Margin" Value="0,10,0,0"/>
+            </Style>
+            <Style x:Key="OutlineButtonStyle" TargetType="Button">
+                <Setter Property="TextColor" Value="{DynamicResource SecondaryColor}"/>
+                <Setter Property="BorderColor" Value="{DynamicResource SecondaryColor}"/>
+                <Setter Property="BorderWidth" Value="1"/>
+                <Setter Property="BackgroundColor" Value="{DynamicResource WhiteColor}"/>
+                <Setter Property="TextTransform" Value="None"/>
+                <Setter Property="Margin" Value="0,10,0,0"/>
+            </Style>
+            <Style TargetType="ContentPage">
+                <Setter Property="BackgroundColor" Value="{StaticResource PageBackgroundColor}"/>
+            </Style>
+        </ResourceDictionary>
+
+    </Application.Resources>
+</prism:PrismApplication>

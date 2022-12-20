@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
+            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+            x:Class="ThreeKTech.Views.MasterTabbedPage"
+            xmlns:helpers="clr-namespace:ThreeKTech.Helpers"
+            xmlns:views="clr-namespace:ThreeKTech.Views"
+            xmlns:badge="clr-namespace:Plugin.Badge.Abstractions;assembly=Plugin.Badge.Abstractions"
+            xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
+            android:TabbedPage.ToolbarPlacement="Bottom"
+            android:TabbedPage.IsSmoothScrollEnabled="False"
+            android:TabbedPage.IsSwipePagingEnabled="False"
+            Style="{DynamicResource TabStyle}">
+    <TabbedPage.Resources>
+        <Style TargetType="TabbedPage" x:Key="TabStyle">
+            <Setter Property="BarBackgroundColor" Value="{DynamicResource PrimaryColor}"/>
+            <Setter Property="SelectedTabColor" Value="{DynamicResource WhiteColor}"/>
+            <Setter Property="UnselectedTabColor" Value="{DynamicResource AccentColor}"/>
+        </Style>
+    </TabbedPage.Resources>
+    <NavigationPage Title="Patients" IconImageSource="patients.png">
+        <x:Arguments>
+            <views:PatientsPage Title="Patients" IconImageSource="patients.png"/>
+        </x:Arguments>
+    </NavigationPage>
+    <NavigationPage Title="Help" IconImageSource="help.png">
+        <x:Arguments>
+            <views:HelpPage Title="Help" IconImageSource="help.png"/>
+        </x:Arguments>
+    </NavigationPage>
+    <NavigationPage Title="Menu" IconImageSource="menu.png">
+        <x:Arguments>
+            <views:MenuPage Title="Menu"
+                    IconImageSource="menu.png"
+                    badge:TabBadge.BadgeText="7"
+                    badge:TabBadge.BadgePosition="PositionTopRight"
+                    badge:TabBadge.BadgeFont="24"
+                    badge:TabBadge.BadgeColor="{StaticResource WhiteColor}"
+                    badge:TabBadge.BadgeTextColor="Black"
+                    badge:TabBadge.BadgeMargin="-20,-5,0,0"/>
+        </x:Arguments>
+    </NavigationPage>
+    
+</TabbedPage>
